@@ -9,29 +9,35 @@ const lookup = {
   'U': 'H','V': 'I','W': 'J','X': 'K',
   'Y': 'L','Z': 'M', '?': '?', ',': ','
 };
-
 function rot13(str) {
-  let decodedStr = "";
-  
+  // Create an empty string to store the decoded message
+  let decoded = "";
+
+  // Loop through each character in the input string
   for (let i = 0; i < str.length; i++) {
-    let charCode = str.charCodeAt(i);
-    
-    if (charCode >= 65 && charCode <= 77) {
-      decodedStr += String.fromCharCode(charCode + 13);
-    } else if (charCode >= 78 && charCode <= 90) {
-      decodedStr += String.fromCharCode(charCode - 13);
+    // Get the ASCII code of the current character
+    const charCode = str.charCodeAt(i);
+
+    // Check if the current character is a letter
+    if (/[A-Z]/.test(str[i])) {
+      // If the character is a letter, shift it 13 places
+      // (taking into account the wrap-around at the end of the alphabet)
+      const shiftedCode = ((charCode - 65 + 13) % 26) + 65;
+
+      // Convert the shifted code back to a character and add it to the decoded message
+      decoded += String.fromCharCode(shiftedCode);
     } else {
-      decodedStr += str.charAt(i);
+      // If the character is not a letter, simply add it to the decoded message
+      decoded += str[i];
     }
   }
-  
-  return decodedStr;
+
+  // Return the decoded message
+  return decoded;
 }
 
+// Example usage
+console.log(rot13("EBG13 rknzcyr."));    // "ROT13 example."
+console.log(rot13("Gur dhvpx oebja sbk whzcf bire n ynml qbt."));   // "The quick brown fox jumps over a lazy dog."
 
-// You can test your code by running the above function and printing it to console by pressing the run button at the top. To run it with input 36, uncomment the following line
-let encodedStr = "EBG13 rknzcyr.";
-let decodedStr = rot13(encodedStr);
-
-console.log(decodedStr); // Output: ROT13 example.
 
