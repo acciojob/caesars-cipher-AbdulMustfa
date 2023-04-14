@@ -10,26 +10,28 @@ const lookup = {
   'Y': 'L','Z': 'M', '?': '?', ',': ','
 };
 
-function rot13(Str){
+function rot13(str) {
   let decodedStr = "";
-
+  
   for (let i = 0; i < str.length; i++) {
     let charCode = str.charCodeAt(i);
-
-    if (charCode >= 65 && charCode <= 90) {
-      charCode = ((charCode - 65 + 13) % 26) + 65;
+    
+    if (charCode >= 65 && charCode <= 77) {
+      decodedStr += String.fromCharCode(charCode + 13);
+    } else if (charCode >= 78 && charCode <= 90) {
+      decodedStr += String.fromCharCode(charCode - 13);
+    } else {
+      decodedStr += str.charAt(i);
     }
-
-    decodedStr += String.fromCharCode(charCode);
   }
-
+  
   return decodedStr;
-
 }
 
+
 // You can test your code by running the above function and printing it to console by pressing the run button at the top. To run it with input 36, uncomment the following line
+let encodedStr = "EBG13 rknzcyr.";
+let decodedStr = rot13(encodedStr);
 
-console.log(rot13("EBG13 rknzcyr.")); // Output: "ROT13 example."
+console.log(decodedStr); // Output: ROT13 example.
 
-
-// module.export = rot13;
