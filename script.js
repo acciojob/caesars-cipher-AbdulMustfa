@@ -32,4 +32,4 @@ function rot13(Str){
 console.log(rot13("EBG13 rknzcyr.")); // Output: "ROT13 example."
 
 
-module.export = rot13;
+// module.export = rot13;
