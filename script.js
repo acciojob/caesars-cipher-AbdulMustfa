@@ -10,30 +10,15 @@ const lookup = {
   'Y': 'L','Z': 'M', '?': '?', ',': ','
 };
 function rot13(str) {
-  // Create an empty string to store the decoded message
-  let decoded = "";
-
-  // Loop through each character in the input string
+  let result = '';
   for (let i = 0; i < str.length; i++) {
-    // Get the ASCII code of the current character
-    const charCode = str.charCodeAt(i);
-
-    // Check if the current character is a letter
-    if (/[A-Z]/.test(str[i])) {
-      // If the character is a letter, shift it 13 places
-      // (taking into account the wrap-around at the end of the alphabet)
-      const shiftedCode = ((charCode - 65 + 13) % 26) + 65;
-
-      // Convert the shifted code back to a character and add it to the decoded message
-      decoded += String.fromCharCode(shiftedCode);
-    } else {
-      // If the character is not a letter, simply add it to the decoded message
-      decoded += str[i];
+    let charCode = str.charCodeAt(i);
+    if (charCode >= 65 && charCode <= 90) {
+      charCode = ((charCode - 65 + 13) % 26) + 65;
     }
+    result += String.fromCharCode(charCode);
   }
-
-  // Return the decoded message
-  return decoded;
+  return result;
 }
 
 // Example usage
