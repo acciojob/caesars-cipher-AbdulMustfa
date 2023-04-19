@@ -1,5 +1,3 @@
-// Your Script here.
-
 const lookup = {
   'A': 'N','B': 'O','C': 'P','D': 'Q',
   'E': 'R','F': 'S','G': 'T','H': 'U',
@@ -9,20 +7,27 @@ const lookup = {
   'U': 'H','V': 'I','W': 'J','X': 'K',
   'Y': 'L','Z': 'M', '?': '?', ',': ','
 };
+
 function rot13(str) {
-  let result = '';
+  let decodedStr = "";
+
   for (let i = 0; i < str.length; i++) {
     let charCode = str.charCodeAt(i);
+
     if (charCode >= 65 && charCode <= 90) {
+      // Rotate the letter by 13 places
       charCode = ((charCode - 65 + 13) % 26) + 65;
     }
-    result += String.fromCharCode(charCode);
+
+    decodedStr += String.fromCharCode(charCode);
   }
-  return result;
+
+  return decodedStr;
 }
 
-// Example usage
-console.log(rot13("EBG13 rknzcyr."));    // "ROT13 example."
-console.log(rot13("Gur dhvpx oebja sbk whzcf bire n ynml qbt."));   // "The quick brown fox jumps over a lazy dog."
 
+// You can test your code by running the above function and printing it to console by pressing the run button at the top. To run it with input 36, uncomment the following line
 
+// console.log(rot13("SERR YBIR? NPPVBWBO"));
+
+module.exports = rot13;
